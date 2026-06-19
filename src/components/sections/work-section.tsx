@@ -8,6 +8,7 @@ const PC_CATALOG = [
     target: "Full HD 144Hz",
     price: "от 89 900 ₽",
     image: "https://cdn.poehali.dev/projects/100aae93-24a5-4a05-bb89-c2c6b017b91c/files/8f690d99-2a5e-4ab7-8751-41911b94e622.jpg",
+    url: "https://hyperpc.ru/gaming-pc/geforce-rtx-4060",
   },
   {
     number: "02",
@@ -16,6 +17,7 @@ const PC_CATALOG = [
     target: "2K 165Hz",
     price: "от 159 900 ₽",
     image: "https://cdn.poehali.dev/projects/100aae93-24a5-4a05-bb89-c2c6b017b91c/files/ec902f9c-d8de-43d1-b608-4eea9975a386.jpg",
+    url: "https://hyperpc.ru/gaming-pc/geforce-rtx-4070-ti",
   },
   {
     number: "03",
@@ -24,6 +26,7 @@ const PC_CATALOG = [
     target: "4K 240Hz",
     price: "от 329 900 ₽",
     image: "https://cdn.poehali.dev/projects/100aae93-24a5-4a05-bb89-c2c6b017b91c/files/3b5d9d94-a203-4504-8a63-3bfdd100c113.jpg",
+    url: "https://hyperpc.ru/gaming-pc/geforce-rtx-4090",
   },
 ]
 
@@ -67,8 +70,11 @@ function PCCard({
   isVisible: boolean
 }) {
   return (
-    <div
-      className={`group relative overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 hover:border-foreground/25 hover:bg-foreground/10 ${
+    <a
+      href={pc.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group relative block overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 hover:border-foreground/25 hover:bg-foreground/10 hover:-translate-y-1 ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
@@ -89,11 +95,11 @@ function PCCard({
         <p className="mb-4 font-mono text-xs text-foreground/40">{pc.target}</p>
         <div className="flex items-center justify-between">
           <span className="font-sans text-lg font-light text-foreground">{pc.price}</span>
-          <span className="font-mono text-xs text-foreground/40 transition-all duration-300 group-hover:text-foreground/70">
+          <span className="font-mono text-xs text-foreground/40 transition-all duration-300 group-hover:text-foreground/70 group-hover:translate-x-1">
             Подробнее →
           </span>
         </div>
       </div>
-    </div>
+    </a>
   )
 }
