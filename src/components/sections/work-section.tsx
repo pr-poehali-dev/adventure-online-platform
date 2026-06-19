@@ -15,32 +15,32 @@ export function WorkSection() {
           }`}
         >
           <h2 className="mb-2 font-sans text-5xl font-light tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Проекты
+            Каталог
           </h2>
-          <p className="font-mono text-sm text-foreground/60 md:text-base">/ Избранные работы</p>
+          <p className="font-mono text-sm text-foreground/60 md:text-base">/ Готовые сборки</p>
         </div>
 
         <div className="space-y-6 md:space-y-8">
           {[
             {
               number: "01",
-              title: "ТехноСтарт",
-              category: "Корпоративный портал",
-              year: "2024",
+              title: "NEXUS Starter",
+              category: "RTX 4060 · Ryzen 5 · 16GB · Full HD 144Hz",
+              year: "от 89 900 ₽",
               direction: "left",
             },
             {
               number: "02",
-              title: "АльфаТрейд",
-              category: "Финтех платформа",
-              year: "2024",
+              title: "NEXUS Pro",
+              category: "RTX 4070 Ti · Ryzen 7 · 32GB · 2K 165Hz",
+              year: "от 159 900 ₽",
               direction: "right",
             },
             {
               number: "03",
-              title: "МедиаПульс",
-              category: "Медиа сервис",
-              year: "2023",
+              title: "NEXUS Ultra",
+              category: "RTX 4090 · Ryzen 9 · 64GB · 4K 240Hz",
+              year: "от 329 900 ₽",
               direction: "left",
             },
           ].map((project, i) => (
