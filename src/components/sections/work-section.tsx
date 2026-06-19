@@ -1,5 +1,32 @@
 import { useReveal } from "@/hooks/use-reveal"
 
+const PC_CATALOG = [
+  {
+    number: "01",
+    title: "NEXUS Starter",
+    specs: "RTX 4060 · Ryzen 5 · 16GB",
+    target: "Full HD 144Hz",
+    price: "от 89 900 ₽",
+    image: "https://cdn.poehali.dev/projects/100aae93-24a5-4a05-bb89-c2c6b017b91c/files/8f690d99-2a5e-4ab7-8751-41911b94e622.jpg",
+  },
+  {
+    number: "02",
+    title: "NEXUS Pro",
+    specs: "RTX 4070 Ti · Ryzen 7 · 32GB",
+    target: "2K 165Hz",
+    price: "от 159 900 ₽",
+    image: "https://cdn.poehali.dev/projects/100aae93-24a5-4a05-bb89-c2c6b017b91c/files/ec902f9c-d8de-43d1-b608-4eea9975a386.jpg",
+  },
+  {
+    number: "03",
+    title: "NEXUS Ultra",
+    specs: "RTX 4090 · Ryzen 9 · 64GB",
+    target: "4K 240Hz",
+    price: "от 329 900 ₽",
+    image: "https://cdn.poehali.dev/projects/100aae93-24a5-4a05-bb89-c2c6b017b91c/files/3b5d9d94-a203-4504-8a63-3bfdd100c113.jpg",
+  },
+]
+
 export function WorkSection() {
   const { ref, isVisible } = useReveal(0.3)
 
@@ -10,7 +37,7 @@ export function WorkSection() {
     >
       <div className="mx-auto w-full max-w-7xl">
         <div
-          className={`mb-12 transition-all duration-700 md:mb-16 ${
+          className={`mb-8 transition-all duration-700 md:mb-12 ${
             isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
           }`}
         >
@@ -20,31 +47,9 @@ export function WorkSection() {
           <p className="font-mono text-sm text-foreground/60 md:text-base">/ Готовые сборки</p>
         </div>
 
-        <div className="space-y-6 md:space-y-8">
-          {[
-            {
-              number: "01",
-              title: "NEXUS Starter",
-              category: "RTX 4060 · Ryzen 5 · 16GB · Full HD 144Hz",
-              year: "от 89 900 ₽",
-              direction: "left",
-            },
-            {
-              number: "02",
-              title: "NEXUS Pro",
-              category: "RTX 4070 Ti · Ryzen 7 · 32GB · 2K 165Hz",
-              year: "от 159 900 ₽",
-              direction: "right",
-            },
-            {
-              number: "03",
-              title: "NEXUS Ultra",
-              category: "RTX 4090 · Ryzen 9 · 64GB · 4K 240Hz",
-              year: "от 329 900 ₽",
-              direction: "left",
-            },
-          ].map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} isVisible={isVisible} />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+          {PC_CATALOG.map((pc, i) => (
+            <PCCard key={i} pc={pc} index={i} isVisible={isVisible} />
           ))}
         </div>
       </div>
@@ -52,43 +57,43 @@ export function WorkSection() {
   )
 }
 
-function ProjectCard({
-  project,
+function PCCard({
+  pc,
   index,
   isVisible,
 }: {
-  project: { number: string; title: string; category: string; year: string; direction: string }
+  pc: (typeof PC_CATALOG)[0]
   index: number
   isVisible: boolean
 }) {
-  const getRevealClass = () => {
-    if (!isVisible) {
-      return project.direction === "left" ? "-translate-x-16 opacity-0" : "translate-x-16 opacity-0"
-    }
-    return "translate-x-0 opacity-100"
-  }
-
   return (
     <div
-      className={`group flex items-center justify-between border-b border-foreground/10 py-6 transition-all duration-700 hover:border-foreground/20 md:py-8 ${getRevealClass()}`}
-      style={{
-        transitionDelay: `${index * 150}ms`,
-        marginLeft: index % 2 === 0 ? "0" : "auto",
-        maxWidth: index % 2 === 0 ? "85%" : "90%",
-      }}
+      className={`group relative overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 hover:border-foreground/25 hover:bg-foreground/10 ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
+      }`}
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="flex items-baseline gap-4 md:gap-8">
-        <span className="font-mono text-sm text-foreground/30 transition-colors group-hover:text-foreground/50 md:text-base">
-          {project.number}
-        </span>
-        <div>
-          <h3 className="mb-1 font-sans text-2xl font-light text-foreground transition-transform duration-300 group-hover:translate-x-2 md:text-3xl lg:text-4xl">
-            {project.title}
-          </h3>
-          <p className="font-mono text-xs text-foreground/50 md:text-sm">{project.category}</p>
+      <div className="relative h-48 overflow-hidden md:h-56">
+        <img
+          src={pc.image}
+          alt={pc.title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <span className="absolute left-4 top-4 font-mono text-xs text-foreground/50">{pc.number}</span>
+      </div>
+
+      <div className="p-5 md:p-6">
+        <h3 className="mb-1 font-sans text-xl font-light text-foreground md:text-2xl">{pc.title}</h3>
+        <p className="mb-1 font-mono text-xs text-foreground/60">{pc.specs}</p>
+        <p className="mb-4 font-mono text-xs text-foreground/40">{pc.target}</p>
+        <div className="flex items-center justify-between">
+          <span className="font-sans text-lg font-light text-foreground">{pc.price}</span>
+          <span className="font-mono text-xs text-foreground/40 transition-all duration-300 group-hover:text-foreground/70">
+            Подробнее →
+          </span>
         </div>
       </div>
-      <span className="font-mono text-xs text-foreground/30 md:text-sm">{project.year}</span>
     </div>
   )
 }
